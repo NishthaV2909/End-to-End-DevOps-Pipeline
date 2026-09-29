@@ -25,13 +25,16 @@ pipeline {
         stage('Test Application') {
             steps {
         bat '''
-            echo Waiting for application to start...
+        echo Waiting for application to start...
 
-            timeout /t 5 /nobreak >nul
+        powershell -Command "Start-Sleep -Seconds 3"
 
-            echo Testing application...
-            curl --fail http://localhost:5000
-        '''
+        echo Testing application...
+
+        curl --fail --retry 5 --retry-delay 2 http://localhost:5000
+
+        echo.
+        echo Application test successful!
             }
         }
     }
