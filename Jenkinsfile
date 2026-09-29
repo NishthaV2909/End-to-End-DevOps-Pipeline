@@ -3,12 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/NishthaV2909/End-to-End-DevOps-Pipeline.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t devops-demo:latest .'
