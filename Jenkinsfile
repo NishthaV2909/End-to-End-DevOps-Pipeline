@@ -24,7 +24,14 @@ pipeline {
 
         stage('Test Application') {
             steps {
-                bat 'curl http://localhost:5000'
+        bat '''
+            echo Waiting for application to start...
+
+            timeout /t 5 /nobreak >nul
+
+            echo Testing application...
+            curl --fail http://localhost:5000
+        '''
             }
         }
     }
